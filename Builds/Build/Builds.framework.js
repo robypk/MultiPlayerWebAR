@@ -1976,15 +1976,22 @@ var tempI64;
 // === Body ===
 
 var ASM_CONSTS = {
-  3491924: function() {Module['emscripten_get_now_backup'] = performance.now;},  
- 3491979: function($0) {performance.now = function() { return $0; };},  
- 3492027: function($0) {performance.now = function() { return $0; };},  
- 3492075: function() {performance.now = Module['emscripten_get_now_backup'];},  
- 3492130: function() {return Module.webglContextAttributes.premultipliedAlpha;},  
- 3492191: function() {return Module.webglContextAttributes.preserveDrawingBuffer;},  
- 3492255: function() {return Module.webglContextAttributes.powerPreference;}
+  3520728: function() {Module['emscripten_get_now_backup'] = performance.now;},  
+ 3520783: function($0) {performance.now = function() { return $0; };},  
+ 3520831: function($0) {performance.now = function() { return $0; };},  
+ 3520879: function() {performance.now = Module['emscripten_get_now_backup'];},  
+ 3520934: function() {return Module.webglContextAttributes.premultipliedAlpha;},  
+ 3520995: function() {return Module.webglContextAttributes.preserveDrawingBuffer;},  
+ 3521059: function() {return Module.webglContextAttributes.powerPreference;}
 };
-
+function zappar_issue_js_plugin_face_mesh_normals(o){ return window.zappar_native_callbacks.face_mesh_normals(o); }
+function zappar_issue_js_plugin_face_mesh_normals_size(o){ return window.zappar_native_callbacks.face_mesh_normals_size(o); }
+function zappar_issue_js_plugin_face_mesh_uvs(o){ return window.zappar_native_callbacks.face_mesh_uvs(o); }
+function zappar_issue_js_plugin_face_mesh_uvs_size(o){ return window.zappar_native_callbacks.face_mesh_uvs_size(o); }
+function zappar_issue_js_plugin_face_mesh_vertices(o){ return window.zappar_native_callbacks.face_mesh_vertices(o); }
+function zappar_issue_js_plugin_face_mesh_vertices_size(o){ return window.zappar_native_callbacks.face_mesh_vertices_size(o); }
+function zappar_issue_js_plugin_render_event(){ window.zappar_native_callbacks.process_gl(); }
+function zappar_issue_js_plugin_upload_gl_event(){ window.zappar_native_callbacks.upload_gl(); }
 
 
 
@@ -4390,6 +4397,13 @@ var ASM_CONSTS = {
   	{
   		HEAPF64[outWidth >> 3] = Module.SystemInfo.width;
   		HEAPF64[outHeight >> 3] = Module.SystemInfo.height;
+  	}
+
+  function _JS_SystemInfo_GetStreamingAssetsURL(buffer, bufferSize) 
+  	{
+  		if (buffer)
+  			stringToUTF8(Module.streamingAssetsUrl, buffer, bufferSize);
+  		return lengthBytesUTF8(Module.streamingAssetsUrl);
   	}
 
   function _JS_SystemInfo_HasAstcHdr()
@@ -13745,6 +13759,16 @@ var ASM_CONSTS = {
       return GLctx.getAttribLocation(GL.programs[program], UTF8ToString(name));
     }
 
+  function _glGetBufferParameteriv(target, value, data) {
+      if (!data) {
+        // GLES2 specification does not specify how to behave if data is a null pointer. Since calling this function does not make sense
+        // if data == null, issue a GL error to notify user about it.
+        GL.recordError(0x501 /* GL_INVALID_VALUE */);
+        return;
+      }
+      HEAP32[((data)>>2)] = GLctx.getBufferParameter(target, value);
+    }
+
   function _glGetBufferSubData(target, offset, size, data) {
       if (!data) {
         // GLES2 specification does not specify how to behave if data is a null pointer. Since calling this function does not make sense
@@ -15759,6 +15783,305 @@ var ASM_CONSTS = {
       return bytes.length-1;
     }
 
+  var zappar_support = {};
+  function _zappar_analytics_project_id_set() {}
+
+  function _zappar_barcode_finder_create() {}
+
+  function _zappar_barcode_finder_destroy() {}
+
+  function _zappar_barcode_finder_enabled() {}
+
+  function _zappar_barcode_finder_enabled_set() {}
+
+  function _zappar_barcode_finder_formats() {}
+
+  function _zappar_barcode_finder_formats_set() {}
+
+  function _zappar_barcode_finder_found_format() {}
+
+  function _zappar_barcode_finder_found_number() {}
+
+  function _zappar_barcode_finder_found_text() {}
+
+  function _zappar_camera_count() {}
+
+  function _zappar_camera_default_device_id() {}
+
+  function _zappar_camera_id() {}
+
+  function _zappar_camera_name() {}
+
+  function _zappar_camera_source_create() {}
+
+  function _zappar_camera_source_destroy() {}
+
+  function _zappar_camera_source_pause() {}
+
+  function _zappar_camera_source_start() {}
+
+  function _zappar_camera_user_facing() {}
+
+  function _zappar_face_landmark_anchor_pose() {}
+
+  function _zappar_face_landmark_create() {}
+
+  function _zappar_face_landmark_destroy() {}
+
+  function _zappar_face_landmark_update() {}
+
+  function _zappar_face_mesh_create() {}
+
+  function _zappar_face_mesh_destroy() {}
+
+  function _zappar_face_mesh_indices() {}
+
+  function _zappar_face_mesh_indices_size() {}
+
+  function _zappar_face_mesh_load_default() {}
+
+  function _zappar_face_mesh_load_default_face() {}
+
+  function _zappar_face_mesh_load_default_full_head_simplified() {}
+
+  function _zappar_face_mesh_load_from_memory() {}
+
+  function _zappar_face_mesh_loaded_version() {}
+
+  function _zappar_face_mesh_normals() {}
+
+  function _zappar_face_mesh_normals_size() {}
+
+  function _zappar_face_mesh_update() {}
+
+  function _zappar_face_mesh_uvs() {}
+
+  function _zappar_face_mesh_uvs_size() {}
+
+  function _zappar_face_mesh_vertices() {}
+
+  function _zappar_face_mesh_vertices_size() {}
+
+  function _zappar_face_tracker_anchor_count() {}
+
+  function _zappar_face_tracker_anchor_expression_coefficients() {}
+
+  function _zappar_face_tracker_anchor_id() {}
+
+  function _zappar_face_tracker_anchor_identity_coefficients() {}
+
+  function _zappar_face_tracker_anchor_pose() {}
+
+  function _zappar_face_tracker_anchor_pose_camera_relative() {}
+
+  function _zappar_face_tracker_anchor_pose_raw() {}
+
+  function _zappar_face_tracker_create() {}
+
+  function _zappar_face_tracker_destroy() {}
+
+  function _zappar_face_tracker_enabled() {}
+
+  function _zappar_face_tracker_enabled_set() {}
+
+  function _zappar_face_tracker_max_faces() {}
+
+  function _zappar_face_tracker_max_faces_set() {}
+
+  function _zappar_face_tracker_model_load_default() {}
+
+  function _zappar_face_tracker_model_load_from_memory() {}
+
+  function _zappar_face_tracker_model_loaded_version() {}
+
+  function _zappar_has_initialized() {}
+
+  function _zappar_image_tracker_anchor_count() {}
+
+  function _zappar_image_tracker_anchor_id() {}
+
+  function _zappar_image_tracker_anchor_pose() {}
+
+  function _zappar_image_tracker_anchor_pose_camera_relative() {}
+
+  function _zappar_image_tracker_anchor_pose_raw() {}
+
+  function _zappar_image_tracker_create() {}
+
+  function _zappar_image_tracker_destroy() {}
+
+  function _zappar_image_tracker_enabled() {}
+
+  function _zappar_image_tracker_enabled_set() {}
+
+  function _zappar_image_tracker_target_count() {}
+
+  function _zappar_image_tracker_target_load_from_memory() {}
+
+  function _zappar_image_tracker_target_loaded_version() {}
+
+  function _zappar_image_tracker_target_physical_scale_factor() {}
+
+  function _zappar_image_tracker_target_preview_compressed() {}
+
+  function _zappar_image_tracker_target_preview_compressed_mimetype() {}
+
+  function _zappar_image_tracker_target_preview_compressed_size() {}
+
+  function _zappar_image_tracker_target_preview_mesh_indices() {}
+
+  function _zappar_image_tracker_target_preview_mesh_indices_size() {}
+
+  function _zappar_image_tracker_target_preview_mesh_normals() {}
+
+  function _zappar_image_tracker_target_preview_mesh_normals_size() {}
+
+  function _zappar_image_tracker_target_preview_mesh_uvs() {}
+
+  function _zappar_image_tracker_target_preview_mesh_uvs_size() {}
+
+  function _zappar_image_tracker_target_preview_mesh_vertices() {}
+
+  function _zappar_image_tracker_target_preview_mesh_vertices_size() {}
+
+  function _zappar_image_tracker_target_preview_rgba() {}
+
+  function _zappar_image_tracker_target_preview_rgba_height() {}
+
+  function _zappar_image_tracker_target_preview_rgba_size() {}
+
+  function _zappar_image_tracker_target_preview_rgba_width() {}
+
+  function _zappar_image_tracker_target_radius_bottom() {}
+
+  function _zappar_image_tracker_target_radius_top() {}
+
+  function _zappar_image_tracker_target_side_length() {}
+
+  function _zappar_image_tracker_target_type() {}
+
+  function _zappar_initialize() {}
+
+  function _zappar_instant_world_tracker_anchor_pose() {}
+
+  function _zappar_instant_world_tracker_anchor_pose_camera_relative() {}
+
+  function _zappar_instant_world_tracker_anchor_pose_raw() {}
+
+  function _zappar_instant_world_tracker_anchor_pose_set_from_camera_offset() {}
+
+  function _zappar_instant_world_tracker_anchor_pose_set_from_camera_offset_raw() {}
+
+  function _zappar_instant_world_tracker_create() {}
+
+  function _zappar_instant_world_tracker_destroy() {}
+
+  function _zappar_instant_world_tracker_enabled() {}
+
+  function _zappar_instant_world_tracker_enabled_set() {}
+
+  function _zappar_is_visible_webgl() { return document.visibilityState === "visible"; }
+
+  function _zappar_loaded() {}
+
+  function _zappar_log_level_set() {}
+
+  function _zappar_permission_denied_any() {}
+
+  function _zappar_permission_denied_camera() {}
+
+  function _zappar_permission_denied_motion() {}
+
+  function _zappar_permission_denied_ui() {}
+
+  function _zappar_permission_granted_all() {}
+
+  function _zappar_permission_granted_camera() {}
+
+  function _zappar_permission_granted_motion() {}
+
+  function _zappar_permission_request_all() {}
+
+  function _zappar_permission_request_camera() {}
+
+  function _zappar_permission_request_motion() {}
+
+  function _zappar_permission_request_ui() {}
+
+  function _zappar_pipeline_camera_frame_camera_attitude() {}
+
+  function _zappar_pipeline_camera_frame_device_attitude() {}
+
+  function _zappar_pipeline_camera_frame_submit() {}
+
+  function _zappar_pipeline_camera_frame_texture_dx11() {}
+
+  function _zappar_pipeline_camera_frame_texture_gl() {}
+
+  function _zappar_pipeline_camera_frame_texture_matrix() {}
+
+  function _zappar_pipeline_camera_frame_texture_metal() {}
+
+  function _zappar_pipeline_camera_frame_user_data() {}
+
+  function _zappar_pipeline_camera_frame_user_facing() {}
+
+  function _zappar_pipeline_camera_model() {}
+
+  function _zappar_pipeline_camera_pose_default() {}
+
+  function _zappar_pipeline_camera_pose_with_attitude() {}
+
+  function _zappar_pipeline_camera_pose_with_origin() {}
+
+  function _zappar_pipeline_create() {}
+
+  function _zappar_pipeline_destroy() {}
+
+  function _zappar_pipeline_frame_number() {}
+
+  function _zappar_pipeline_frame_update() {}
+
+  function _zappar_pipeline_gl_context_set() {}
+
+  function _zappar_pipeline_motion_accelerometer_submit() {}
+
+  function _zappar_pipeline_motion_attitude_matrix_submit() {}
+
+  function _zappar_pipeline_motion_attitude_submit() {}
+
+  function _zappar_pipeline_motion_rotation_rate_submit() {}
+
+  function _zappar_pipeline_sequence_record_clear() {}
+
+  function _zappar_pipeline_sequence_record_data() {}
+
+  function _zappar_pipeline_sequence_record_data_size() {}
+
+  function _zappar_pipeline_sequence_record_device_attitude_matrices_set() {}
+
+  function _zappar_pipeline_sequence_record_start() {}
+
+  function _zappar_pipeline_sequence_record_stop() {}
+
+  function _zappar_pipeline_set() {}
+
+  function _zappar_projection_matrix_from_camera_model() {}
+
+  function _zappar_projection_matrix_from_camera_model_ext() {}
+
+  function _zappar_sequence_source_create() {}
+
+  function _zappar_sequence_source_destroy() {}
+
+  function _zappar_sequence_source_load_from_memory() {}
+
+  function _zappar_sequence_source_max_playback_fps_set() {}
+
+  function _zappar_sequence_source_pause() {}
+
+  function _zappar_sequence_source_start() {}
+
   var FSNode = /** @constructor */ function(parent, name, mode, rdev) {
     if (!parent) {
       parent = this;  // root node sets parent to itself
@@ -15948,6 +16271,948 @@ var __miniTempWebGLIntBuffersStorage = new Int32Array(288);
   __miniTempWebGLIntBuffers[i] = __miniTempWebGLIntBuffersStorage.subarray(0, i+1);
   }
   ;
+
+      (function() {
+      var hasInitialized = false;
+      var zappar;
+      var textureMap = new Map();
+      var pipeline_;
+  
+      _zappar_has_initialized = function() {
+          return hasInitialized ? 1 : 0;
+      }
+  
+      _zappar_initialize = function() {
+          if (typeof ZCV === 'undefined') {
+              var scr = document.createElement("script");
+              scr.src="https://libs.zappar.com/zappar-cv/2.1.2/zappar-cv.js";
+              scr.addEventListener('load', function() {
+                  zappar = ZCV.initialize();
+                  hasInitialized = true;
+              });
+              document.body.appendChild(scr);
+          } else {
+              if(typeof window.zappar === 'undefined' && typeof zappar === 'undefined'){
+                  zappar = ZCV.initialize();
+              }else if(typeof zappar === 'undefined') {
+                  zappar = window.zappar;
+              }
+              hasInitialized = true;
+          }
+  
+          var zappar_native_callbacks = {
+              process_gl: _zappar_pipeline_process_gl,
+              upload_gl: _zappar_pipeline_camera_frame_upload_gl,
+              face_mesh_vertices: _zappar_face_mesh_vertices,
+              face_mesh_vertices_size: _zappar_face_mesh_vertices_size,
+              face_mesh_normals: _zappar_face_mesh_normals,
+              face_mesh_normals_size: _zappar_face_mesh_normals_size,
+              face_mesh_uvs: _zappar_face_mesh_uvs,
+              face_mesh_uvs_size: _zappar_face_mesh_uvs_size
+          };
+  
+          window.zappar_native_callbacks = zappar_native_callbacks;
+      }
+  
+      _zappar_pipeline_gl_context_set = function( pipeline ) {
+          zappar.pipeline_gl_context_set(pipeline, GLctx);
+      };
+  
+      _zappar_pipeline_set = function(o) {
+          pipeline_ = o;
+      };
+  
+      _zappar_pipeline_process_gl = function(o) {
+          var ret = zappar.pipeline_process_gl( pipeline_ );
+          return ret;
+      };
+  
+      _zappar_pipeline_camera_frame_upload_gl = function(o) {  
+          var ret = zappar.pipeline_camera_frame_upload_gl(pipeline_);
+          return ret;
+      };
+      
+      _zappar_loaded = function() {
+          
+          var ret = zappar.loaded();
+          return ret;
+      };
+  	_zappar_camera_default_device_id = function(userFacing) {
+          var userFacing_val = userFacing;
+          var ret = zappar.camera_default_device_id(userFacing_val);
+          var bufferSize = lengthBytesUTF8(ret) + 1;
+          var buffer = _malloc(bufferSize);
+          stringToUTF8(ret, buffer, bufferSize);
+          return buffer;
+      };
+  	_zappar_camera_count = function() {
+          
+          var ret = zappar.camera_count();
+          return ret;
+      };
+  	_zappar_camera_id = function(indx) {
+          var indx_val = indx;
+          var ret = zappar.camera_id(indx_val);
+          var bufferSize = lengthBytesUTF8(ret) + 1;
+          var buffer = _malloc(bufferSize);
+          stringToUTF8(ret, buffer, bufferSize);
+          return buffer;
+      };
+  	_zappar_camera_name = function(indx) {
+          var indx_val = indx;
+          var ret = zappar.camera_name(indx_val);
+          var bufferSize = lengthBytesUTF8(ret) + 1;
+          var buffer = _malloc(bufferSize);
+          stringToUTF8(ret, buffer, bufferSize);
+          return buffer;
+      };
+  	_zappar_camera_user_facing = function(indx) {
+          var indx_val = indx;
+          var ret = zappar.camera_user_facing(indx_val);
+          return ret;
+      };
+  	_zappar_projection_matrix_from_camera_model = function(model, renderWidth, renderHeight) {
+          var model_val = new Float32Array(6);
+          model_val.set(HEAPF32.subarray(model/4, 6 + model / 4));
+  		var renderWidth_val = renderWidth;
+  		var renderHeight_val = renderHeight;
+          var ret = zappar.projection_matrix_from_camera_model(model_val, renderWidth_val, renderHeight_val);
+          var buffer = _malloc(16 * 4);
+          HEAPF32.set(ret, buffer / 4);
+          return buffer;
+      };
+  	_zappar_projection_matrix_from_camera_model_ext = function(model, renderWidth, renderHeight, zNear, zFar) {
+          var model_val = new Float32Array(6);
+          model_val.set(HEAPF32.subarray(model/4, 6 + model / 4));
+  		var renderWidth_val = renderWidth;
+  		var renderHeight_val = renderHeight;
+  		var zNear_val = zNear;
+  		var zFar_val = zFar;
+          var ret = zappar.projection_matrix_from_camera_model_ext(model_val, renderWidth_val, renderHeight_val, zNear_val, zFar_val);
+          var buffer = _malloc(16 * 4);
+          HEAPF32.set(ret, buffer / 4);
+          return buffer;
+      };
+  	
+  	
+  	
+  	_zappar_log_level_set = function(level) {
+          var level_val = level;
+          var ret = zappar.log_level_set(level_val);
+          return ret;
+      };
+  	
+  	
+  	
+  	_zappar_permission_request_ui = function() {
+          
+          var ret = zappar.permission_request_ui();
+          return ret;
+      };
+  	_zappar_permission_denied_ui = function() {
+          
+          var ret = zappar.permission_denied_ui();
+          return ret;
+      };
+  	_zappar_permission_request_all = function() {
+          
+          var ret = zappar.permission_request_all();
+          return ret;
+      };
+  	_zappar_permission_request_camera = function() {
+          
+          var ret = zappar.permission_request_camera();
+          return ret;
+      };
+  	_zappar_permission_request_motion = function() {
+          
+          var ret = zappar.permission_request_motion();
+          return ret;
+      };
+  	_zappar_permission_granted_all = function() {
+          
+          var ret = zappar.permission_granted_all();
+          return ret;
+      };
+  	_zappar_permission_granted_camera = function() {
+          
+          var ret = zappar.permission_granted_camera();
+          return ret;
+      };
+  	_zappar_permission_granted_motion = function() {
+          
+          var ret = zappar.permission_granted_motion();
+          return ret;
+      };
+  	_zappar_permission_denied_any = function() {
+          
+          var ret = zappar.permission_denied_any();
+          return ret;
+      };
+  	_zappar_permission_denied_camera = function() {
+          
+          var ret = zappar.permission_denied_camera();
+          return ret;
+      };
+  	_zappar_permission_denied_motion = function() {
+          
+          var ret = zappar.permission_denied_motion();
+          return ret;
+      };
+  	_zappar_analytics_project_id_set = function(id, uid) {
+          var id_val = UTF8ToString(id);
+  		var uid_val = UTF8ToString(uid);
+          var ret = zappar.analytics_project_id_set(id_val, uid_val);
+          return ret;
+      };
+      
+      _zappar_pipeline_create = function() {
+          
+          var ret = zappar.pipeline_create();
+          return ret;
+      };
+      _zappar_pipeline_destroy = function(o) {
+          var o_val = o;
+          var ret = zappar.pipeline_destroy(o_val);
+          return ret;
+      };
+      
+  	_zappar_pipeline_camera_frame_texture_gl = function(o) {
+          
+          var ret = zappar.pipeline_camera_frame_texture_gl(o);
+          if (!ret) return 0;
+          var id = textureMap.get(ret);
+          if (id === undefined) {
+              id = GL.getNewId(GL.textures);
+              GL.textures[id] = ret;
+              textureMap.set (ret, id);
+          }
+          return id !== undefined ? id : 0;
+          
+      };
+  	
+  	
+  	
+  	
+  	_zappar_pipeline_camera_frame_texture_matrix = function(o, renderWidth, renderHeight, mirror) {
+          var renderWidth_val = renderWidth;
+  		var renderHeight_val = renderHeight;
+  		var mirror_val = mirror;
+          var ret = zappar.pipeline_camera_frame_texture_matrix(o, renderWidth_val, renderHeight_val, mirror_val);
+          var buffer = _malloc(16 * 4);
+          HEAPF32.set(ret, buffer / 4);
+          return buffer;
+      };
+  	
+  	_zappar_pipeline_frame_update = function(o) {
+          
+          var ret = zappar.pipeline_frame_update(o);
+          return ret;
+      };
+  	_zappar_pipeline_frame_number = function(o) {
+          
+          var ret = zappar.pipeline_frame_number(o);
+          return ret;
+      };
+  	_zappar_pipeline_camera_model = function(o) {
+          
+          var ret = zappar.pipeline_camera_model(o);
+          var buffer = _malloc(6 * 4);
+          HEAPF32.set(ret, buffer / 4);
+          return buffer;
+      };
+  	_zappar_pipeline_camera_pose_default = function(o) {
+          
+          var ret = zappar.pipeline_camera_pose_default(o);
+          var buffer = _malloc(16 * 4);
+          HEAPF32.set(ret, buffer / 4);
+          return buffer;
+      };
+  	_zappar_pipeline_camera_pose_with_attitude = function(o, mirror) {
+          var mirror_val = mirror;
+          var ret = zappar.pipeline_camera_pose_with_attitude(o, mirror_val);
+          var buffer = _malloc(16 * 4);
+          HEAPF32.set(ret, buffer / 4);
+          return buffer;
+      };
+  	_zappar_pipeline_camera_pose_with_origin = function(o, pose) {
+          var pose_val = new Float32Array(16);
+          pose_val.set(HEAPF32.subarray(pose/4, 16 + pose / 4));
+          var ret = zappar.pipeline_camera_pose_with_origin(o, pose_val);
+          var buffer = _malloc(16 * 4);
+          HEAPF32.set(ret, buffer / 4);
+          return buffer;
+      };
+  	_zappar_pipeline_camera_frame_user_data = function(o) {
+          
+          var ret = zappar.pipeline_camera_frame_user_data(o);
+          return ret;
+      };
+  	_zappar_pipeline_camera_frame_submit = function(o, data, data_size, width, height, user_data, camera_to_device_transform, camera_model, user_facing) {
+          var data_val = new Uint8Array(data_size);
+          data_val.set(HEAPU8.subarray(data, data + data_size));
+  		var width_val = width;
+  		var height_val = height;
+  		var user_data_val = user_data;
+  		var camera_to_device_transform_val = new Float32Array(16);
+          camera_to_device_transform_val.set(HEAPF32.subarray(camera_to_device_transform/4, 16 + camera_to_device_transform / 4));
+  		var camera_model_val = new Float32Array(6);
+          camera_model_val.set(HEAPF32.subarray(camera_model/4, 6 + camera_model / 4));
+  		var user_facing_val = user_facing;
+          var ret = zappar.pipeline_camera_frame_submit(o, data_val, width_val, height_val, user_data_val, camera_to_device_transform_val, camera_model_val, user_facing_val);
+          return ret;
+      };
+  	
+  	_zappar_pipeline_camera_frame_camera_attitude = function(o) {
+          
+          var ret = zappar.pipeline_camera_frame_camera_attitude(o);
+          var buffer = _malloc(16 * 4);
+          HEAPF32.set(ret, buffer / 4);
+          return buffer;
+      };
+  	_zappar_pipeline_camera_frame_device_attitude = function(o) {
+          
+          var ret = zappar.pipeline_camera_frame_device_attitude(o);
+          var buffer = _malloc(16 * 4);
+          HEAPF32.set(ret, buffer / 4);
+          return buffer;
+      };
+  	_zappar_pipeline_camera_frame_user_facing = function(o) {
+          
+          var ret = zappar.pipeline_camera_frame_user_facing(o);
+          return ret;
+      };
+  	_zappar_pipeline_motion_accelerometer_submit = function(o, time, x, y, z) {
+          var time_val = time;
+  		var x_val = x;
+  		var y_val = y;
+  		var z_val = z;
+          var ret = zappar.pipeline_motion_accelerometer_submit(o, time_val, x_val, y_val, z_val);
+          return ret;
+      };
+  	_zappar_pipeline_motion_rotation_rate_submit = function(o, time, x, y, z) {
+          var time_val = time;
+  		var x_val = x;
+  		var y_val = y;
+  		var z_val = z;
+          var ret = zappar.pipeline_motion_rotation_rate_submit(o, time_val, x_val, y_val, z_val);
+          return ret;
+      };
+  	_zappar_pipeline_motion_attitude_submit = function(o, time, x, y, z) {
+          var time_val = time;
+  		var x_val = x;
+  		var y_val = y;
+  		var z_val = z;
+          var ret = zappar.pipeline_motion_attitude_submit(o, time_val, x_val, y_val, z_val);
+          return ret;
+      };
+  	_zappar_pipeline_motion_attitude_matrix_submit = function(o, mat) {
+          var mat_val = new Float32Array(16);
+          mat_val.set(HEAPF32.subarray(mat/4, 16 + mat / 4));
+          var ret = zappar.pipeline_motion_attitude_matrix_submit(o, mat_val);
+          return ret;
+      };
+  	_zappar_pipeline_sequence_record_start = function(o, expected_frames) {
+          var expected_frames_val = expected_frames;
+          var ret = zappar.pipeline_sequence_record_start(o, expected_frames_val);
+          return ret;
+      };
+  	_zappar_pipeline_sequence_record_stop = function(o) {
+          
+          var ret = zappar.pipeline_sequence_record_stop(o);
+          return ret;
+      };
+  	_zappar_pipeline_sequence_record_device_attitude_matrices_set = function(o, val) {
+          var val_val = val;
+          var ret = zappar.pipeline_sequence_record_device_attitude_matrices_set(o, val_val);
+          return ret;
+      };
+  	_zappar_pipeline_sequence_record_data = function(o) {
+          
+          var ret = zappar.pipeline_sequence_record_data(o);
+          return ret;
+      };
+  	_zappar_pipeline_sequence_record_data_size = function(o) {
+          
+          var ret = zappar.pipeline_sequence_record_data_size(o);
+          return ret;
+      };
+  	_zappar_pipeline_sequence_record_clear = function(o) {
+          
+          var ret = zappar.pipeline_sequence_record_clear(o);
+          return ret;
+      };
+      
+  	
+      _zappar_camera_source_create = function(pipeline, device_id) {
+          var pipeline_val = pipeline;
+  		var device_id_val = UTF8ToString(device_id);
+          var ret = zappar.camera_source_create(pipeline_val, device_id_val);
+          return ret;
+      };
+      _zappar_camera_source_destroy = function(o) {
+          var o_val = o;
+          var ret = zappar.camera_source_destroy(o_val);
+          return ret;
+      };
+      _zappar_camera_source_start = function(o) {
+          
+          var ret = zappar.camera_source_start(o);
+          return ret;
+      };
+  	_zappar_camera_source_pause = function(o) {
+          
+          var ret = zappar.camera_source_pause(o);
+          return ret;
+      };
+      
+  	
+      _zappar_sequence_source_create = function(pipeline) {
+          var pipeline_val = pipeline;
+          var ret = zappar.sequence_source_create(pipeline_val);
+          return ret;
+      };
+      _zappar_sequence_source_destroy = function(o) {
+          var o_val = o;
+          var ret = zappar.sequence_source_destroy(o_val);
+          return ret;
+      };
+      _zappar_sequence_source_start = function(o) {
+          
+          var ret = zappar.sequence_source_start(o);
+          return ret;
+      };
+  	_zappar_sequence_source_pause = function(o) {
+          
+          var ret = zappar.sequence_source_pause(o);
+          return ret;
+      };
+  	_zappar_sequence_source_load_from_memory = function(o, data, data_size) {
+          var data_val = new Uint8Array(data_size);
+          data_val.set(HEAPU8.subarray(data, data + data_size));
+          var ret = zappar.sequence_source_load_from_memory(o, data_val);
+          return ret;
+      };
+  	_zappar_sequence_source_max_playback_fps_set = function(o, fps) {
+          var fps_val = fps;
+          var ret = zappar.sequence_source_max_playback_fps_set(o, fps_val);
+          return ret;
+      };
+      
+  	
+      _zappar_image_tracker_create = function(pipeline) {
+          var pipeline_val = pipeline;
+          var ret = zappar.image_tracker_create(pipeline_val);
+          return ret;
+      };
+      _zappar_image_tracker_destroy = function(o) {
+          var o_val = o;
+          var ret = zappar.image_tracker_destroy(o_val);
+          return ret;
+      };
+      _zappar_image_tracker_target_load_from_memory = function(o, data, data_size) {
+          var data_val = new Uint8Array(data_size);
+          data_val.set(HEAPU8.subarray(data, data + data_size));
+          var ret = zappar.image_tracker_target_load_from_memory(o, data_val);
+          return ret;
+      };
+  	_zappar_image_tracker_target_loaded_version = function(o) {
+          
+          var ret = zappar.image_tracker_target_loaded_version(o);
+          return ret;
+      };
+  	_zappar_image_tracker_target_count = function(o) {
+          
+          var ret = zappar.image_tracker_target_count(o);
+          return ret;
+      };
+  	_zappar_image_tracker_target_type = function(o, indx) {
+          var indx_val = indx;
+          var ret = zappar.image_tracker_target_type(o, indx_val);
+          return ret;
+      };
+  	_zappar_image_tracker_target_radius_top = function(o, indx) {
+          var indx_val = indx;
+          var ret = zappar.image_tracker_target_radius_top(o, indx_val);
+          return ret;
+      };
+  	_zappar_image_tracker_target_radius_bottom = function(o, indx) {
+          var indx_val = indx;
+          var ret = zappar.image_tracker_target_radius_bottom(o, indx_val);
+          return ret;
+      };
+  	_zappar_image_tracker_target_side_length = function(o, indx) {
+          var indx_val = indx;
+          var ret = zappar.image_tracker_target_side_length(o, indx_val);
+          return ret;
+      };
+  	_zappar_image_tracker_target_physical_scale_factor = function(o, indx) {
+          var indx_val = indx;
+          var ret = zappar.image_tracker_target_physical_scale_factor(o, indx_val);
+          return ret;
+      };
+  	
+  	_zappar_image_tracker_target_preview_compressed_size = function(o, indx) {
+          var indx_val = indx;
+          var ret = zappar.image_tracker_target_preview_compressed_size(o, indx_val);
+          return ret;
+      };
+  	
+  	
+  	
+  	
+  	
+  	_zappar_image_tracker_target_preview_mesh_indices = function(o, indx) {
+          var indx_val = indx;
+          var ret = zappar.image_tracker_target_preview_mesh_indices(o, indx_val);
+          var n = zappar.image_tracker_target_preview_mesh_indices_size(o, indx);
+          var buffer = _malloc(n * 2);
+          HEAPU16.set(ret, buffer / 2);
+          return buffer;
+      };
+  	_zappar_image_tracker_target_preview_mesh_indices_size = function(o, indx) {
+          var indx_val = indx;
+          var ret = zappar.image_tracker_target_preview_mesh_indices_size(o, indx_val);
+          return ret;
+      };
+  	_zappar_image_tracker_target_preview_mesh_vertices = function(o, indx) {
+          var indx_val = indx;
+          var ret = zappar.image_tracker_target_preview_mesh_vertices(o, indx_val);
+          var n = zappar.image_tracker_target_preview_mesh_vertices_size(o, indx);
+          var buffer = _malloc(n * 4);
+          HEAPF32.set(ret, buffer / 4);
+          return buffer;
+      };
+  	_zappar_image_tracker_target_preview_mesh_vertices_size = function(o, indx) {
+          var indx_val = indx;
+          var ret = zappar.image_tracker_target_preview_mesh_vertices_size(o, indx_val);
+          return ret;
+      };
+  	_zappar_image_tracker_target_preview_mesh_normals = function(o, indx) {
+          var indx_val = indx;
+          var ret = zappar.image_tracker_target_preview_mesh_normals(o, indx_val);
+          var n = zappar.image_tracker_target_preview_mesh_normals_size(o, indx);
+          var buffer = _malloc(n * 4);
+          HEAPF32.set(ret, buffer / 4);
+          return buffer;
+      };
+  	_zappar_image_tracker_target_preview_mesh_normals_size = function(o, indx) {
+          var indx_val = indx;
+          var ret = zappar.image_tracker_target_preview_mesh_normals_size(o, indx_val);
+          return ret;
+      };
+  	_zappar_image_tracker_target_preview_mesh_uvs = function(o, indx) {
+          var indx_val = indx;
+          var ret = zappar.image_tracker_target_preview_mesh_uvs(o, indx_val);
+          var n = zappar.image_tracker_target_preview_mesh_uvs_size(o, indx);
+          var buffer = _malloc(n * 4);
+          HEAPF32.set(ret, buffer / 4);
+          return buffer;
+      };
+  	_zappar_image_tracker_target_preview_mesh_uvs_size = function(o, indx) {
+          var indx_val = indx;
+          var ret = zappar.image_tracker_target_preview_mesh_uvs_size(o, indx_val);
+          return ret;
+      };
+  	_zappar_image_tracker_enabled = function(o) {
+          
+          var ret = zappar.image_tracker_enabled(o);
+          return ret;
+      };
+  	_zappar_image_tracker_enabled_set = function(o, enabled) {
+          var enabled_val = enabled;
+          var ret = zappar.image_tracker_enabled_set(o, enabled_val);
+          return ret;
+      };
+  	_zappar_image_tracker_anchor_count = function(o) {
+          
+          var ret = zappar.image_tracker_anchor_count(o);
+          return ret;
+      };
+  	_zappar_image_tracker_anchor_id = function(o, indx) {
+          var indx_val = indx;
+          var ret = zappar.image_tracker_anchor_id(o, indx_val);
+          var bufferSize = lengthBytesUTF8(ret) + 1;
+          var buffer = _malloc(bufferSize);
+          stringToUTF8(ret, buffer, bufferSize);
+          return buffer;
+      };
+  	_zappar_image_tracker_anchor_pose_raw = function(o, indx) {
+          var indx_val = indx;
+          var ret = zappar.image_tracker_anchor_pose_raw(o, indx_val);
+          var buffer = _malloc(16 * 4);
+          HEAPF32.set(ret, buffer / 4);
+          return buffer;
+      };
+  	_zappar_image_tracker_anchor_pose_camera_relative = function(o, indx, mirror) {
+          var indx_val = indx;
+  		var mirror_val = mirror;
+          var ret = zappar.image_tracker_anchor_pose_camera_relative(o, indx_val, mirror_val);
+          var buffer = _malloc(16 * 4);
+          HEAPF32.set(ret, buffer / 4);
+          return buffer;
+      };
+  	_zappar_image_tracker_anchor_pose = function(o, indx, camera_pose, mirror) {
+          var indx_val = indx;
+  		var camera_pose_val = new Float32Array(16);
+          camera_pose_val.set(HEAPF32.subarray(camera_pose/4, 16 + camera_pose / 4));
+  		var mirror_val = mirror;
+          var ret = zappar.image_tracker_anchor_pose(o, indx_val, camera_pose_val, mirror_val);
+          var buffer = _malloc(16 * 4);
+          HEAPF32.set(ret, buffer / 4);
+          return buffer;
+      };
+      
+  	
+      _zappar_face_tracker_create = function(pipeline) {
+          var pipeline_val = pipeline;
+          var ret = zappar.face_tracker_create(pipeline_val);
+          return ret;
+      };
+      _zappar_face_tracker_destroy = function(o) {
+          var o_val = o;
+          var ret = zappar.face_tracker_destroy(o_val);
+          return ret;
+      };
+      _zappar_face_tracker_model_load_from_memory = function(o, data, data_size) {
+          var data_val = new Uint8Array(data_size);
+          data_val.set(HEAPU8.subarray(data, data + data_size));
+          var ret = zappar.face_tracker_model_load_from_memory(o, data_val);
+          return ret;
+      };
+  	_zappar_face_tracker_model_load_default = function(o) {
+          
+          var ret = zappar.face_tracker_model_load_default(o);
+          return ret;
+      };
+  	_zappar_face_tracker_model_loaded_version = function(o) {
+          
+          var ret = zappar.face_tracker_model_loaded_version(o);
+          return ret;
+      };
+  	_zappar_face_tracker_enabled_set = function(o, enabled) {
+          var enabled_val = enabled;
+          var ret = zappar.face_tracker_enabled_set(o, enabled_val);
+          return ret;
+      };
+  	_zappar_face_tracker_enabled = function(o) {
+          
+          var ret = zappar.face_tracker_enabled(o);
+          return ret;
+      };
+  	_zappar_face_tracker_max_faces_set = function(o, num) {
+          var num_val = num;
+          var ret = zappar.face_tracker_max_faces_set(o, num_val);
+          return ret;
+      };
+  	_zappar_face_tracker_max_faces = function(o) {
+          
+          var ret = zappar.face_tracker_max_faces(o);
+          return ret;
+      };
+  	_zappar_face_tracker_anchor_count = function(o) {
+          
+          var ret = zappar.face_tracker_anchor_count(o);
+          return ret;
+      };
+  	_zappar_face_tracker_anchor_id = function(o, indx) {
+          var indx_val = indx;
+          var ret = zappar.face_tracker_anchor_id(o, indx_val);
+          var bufferSize = lengthBytesUTF8(ret) + 1;
+          var buffer = _malloc(bufferSize);
+          stringToUTF8(ret, buffer, bufferSize);
+          return buffer;
+      };
+  	_zappar_face_tracker_anchor_pose_raw = function(o, indx) {
+          var indx_val = indx;
+          var ret = zappar.face_tracker_anchor_pose_raw(o, indx_val);
+          var buffer = _malloc(16 * 4);
+          HEAPF32.set(ret, buffer / 4);
+          return buffer;
+      };
+  	_zappar_face_tracker_anchor_pose_camera_relative = function(o, indx, mirror) {
+          var indx_val = indx;
+  		var mirror_val = mirror;
+          var ret = zappar.face_tracker_anchor_pose_camera_relative(o, indx_val, mirror_val);
+          var buffer = _malloc(16 * 4);
+          HEAPF32.set(ret, buffer / 4);
+          return buffer;
+      };
+  	_zappar_face_tracker_anchor_pose = function(o, indx, camera_pose, mirror) {
+          var indx_val = indx;
+  		var camera_pose_val = new Float32Array(16);
+          camera_pose_val.set(HEAPF32.subarray(camera_pose/4, 16 + camera_pose / 4));
+  		var mirror_val = mirror;
+          var ret = zappar.face_tracker_anchor_pose(o, indx_val, camera_pose_val, mirror_val);
+          var buffer = _malloc(16 * 4);
+          HEAPF32.set(ret, buffer / 4);
+          return buffer;
+      };
+  	_zappar_face_tracker_anchor_identity_coefficients = function(o, indx) {
+          var indx_val = indx;
+          var ret = zappar.face_tracker_anchor_identity_coefficients(o, indx_val);
+          var buffer = _malloc(50 * 4);
+          HEAPF32.set(ret, buffer / 4);
+          return buffer;
+      };
+  	_zappar_face_tracker_anchor_expression_coefficients = function(o, indx) {
+          var indx_val = indx;
+          var ret = zappar.face_tracker_anchor_expression_coefficients(o, indx_val);
+          var buffer = _malloc(29 * 4);
+          HEAPF32.set(ret, buffer / 4);
+          return buffer;
+      };
+      
+  	
+      _zappar_face_mesh_create = function() {
+          
+          var ret = zappar.face_mesh_create();
+          return ret;
+      };
+      _zappar_face_mesh_destroy = function(o) {
+          var o_val = o;
+          var ret = zappar.face_mesh_destroy(o_val);
+          return ret;
+      };
+      _zappar_face_mesh_load_from_memory = function(o, data, data_size, fill_mouth, fill_eye_l, fill_eye_r, fill_neck) {
+          var data_val = new Uint8Array(data_size);
+          data_val.set(HEAPU8.subarray(data, data + data_size));
+  		var fill_mouth_val = fill_mouth;
+  		var fill_eye_l_val = fill_eye_l;
+  		var fill_eye_r_val = fill_eye_r;
+  		var fill_neck_val = fill_neck;
+          var ret = zappar.face_mesh_load_from_memory(o, data_val, fill_mouth_val, fill_eye_l_val, fill_eye_r_val, fill_neck_val);
+          return ret;
+      };
+  	_zappar_face_mesh_load_default = function(o) {
+          
+          var ret = zappar.face_mesh_load_default(o);
+          return ret;
+      };
+  	_zappar_face_mesh_load_default_full_head_simplified = function(o, fill_mouth, fill_eye_l, fill_eye_r, fill_neck) {
+          var fill_mouth_val = fill_mouth;
+  		var fill_eye_l_val = fill_eye_l;
+  		var fill_eye_r_val = fill_eye_r;
+  		var fill_neck_val = fill_neck;
+          var ret = zappar.face_mesh_load_default_full_head_simplified(o, fill_mouth_val, fill_eye_l_val, fill_eye_r_val, fill_neck_val);
+          return ret;
+      };
+  	_zappar_face_mesh_load_default_face = function(o, fill_eye_l, fill_eye_r, fill_mouth) {
+          var fill_eye_l_val = fill_eye_l;
+  		var fill_eye_r_val = fill_eye_r;
+  		var fill_mouth_val = fill_mouth;
+          var ret = zappar.face_mesh_load_default_face(o, fill_eye_l_val, fill_eye_r_val, fill_mouth_val);
+          return ret;
+      };
+  	_zappar_face_mesh_loaded_version = function(o) {
+          
+          var ret = zappar.face_mesh_loaded_version(o);
+          return ret;
+      };
+  	_zappar_face_mesh_update = function(o, identity, expression, mirrored) {
+          var identity_val = new Float32Array(50);
+          identity_val.set(HEAPF32.subarray(identity/4, 50 + identity / 4));
+  		var expression_val = new Float32Array(29);
+          expression_val.set(HEAPF32.subarray(expression/4, 29 + expression / 4));
+  		var mirrored_val = mirrored;
+          var ret = zappar.face_mesh_update(o, identity_val, expression_val, mirrored_val);
+          return ret;
+      };
+  	_zappar_face_mesh_indices_size = function(o) {
+          
+          var ret = zappar.face_mesh_indices_size(o);
+          return ret;
+      };
+  	_zappar_face_mesh_indices = function(o) {
+          
+          var ret = zappar.face_mesh_indices(o);
+          var n = zappar.face_mesh_indices_size(o);
+          var buffer = _malloc(n * 2);
+          HEAPU16.set(ret, buffer / 2);
+          return buffer;
+      };
+  	_zappar_face_mesh_vertices_size = function(o) {
+          
+          var ret = zappar.face_mesh_vertices_size(o);
+          return ret;
+      };
+  	_zappar_face_mesh_vertices = function(o) {
+          
+          var ret = zappar.face_mesh_vertices(o);
+          var n = zappar.face_mesh_vertices_size(o);
+          var buffer = _malloc(n * 4);
+          HEAPF32.set(ret, buffer / 4);
+          return buffer;
+      };
+  	_zappar_face_mesh_normals_size = function(o) {
+          
+          var ret = zappar.face_mesh_normals_size(o);
+          return ret;
+      };
+  	_zappar_face_mesh_normals = function(o) {
+          
+          var ret = zappar.face_mesh_normals(o);
+          var n = zappar.face_mesh_normals_size(o);
+          var buffer = _malloc(n * 4);
+          HEAPF32.set(ret, buffer / 4);
+          return buffer;
+      };
+  	_zappar_face_mesh_uvs_size = function(o) {
+          
+          var ret = zappar.face_mesh_uvs_size(o);
+          return ret;
+      };
+  	_zappar_face_mesh_uvs = function(o) {
+          
+          var ret = zappar.face_mesh_uvs(o);
+          var n = zappar.face_mesh_uvs_size(o);
+          var buffer = _malloc(n * 4);
+          HEAPF32.set(ret, buffer / 4);
+          return buffer;
+      };
+      
+  	
+      _zappar_face_landmark_create = function(landmark) {
+          var landmark_val = landmark;
+          var ret = zappar.face_landmark_create(landmark_val);
+          return ret;
+      };
+      _zappar_face_landmark_destroy = function(o) {
+          var o_val = o;
+          var ret = zappar.face_landmark_destroy(o_val);
+          return ret;
+      };
+      _zappar_face_landmark_update = function(o, identity, expression, mirrored) {
+          var identity_val = new Float32Array(50);
+          identity_val.set(HEAPF32.subarray(identity/4, 50 + identity / 4));
+  		var expression_val = new Float32Array(29);
+          expression_val.set(HEAPF32.subarray(expression/4, 29 + expression / 4));
+  		var mirrored_val = mirrored;
+          var ret = zappar.face_landmark_update(o, identity_val, expression_val, mirrored_val);
+          return ret;
+      };
+  	_zappar_face_landmark_anchor_pose = function(o) {
+          
+          var ret = zappar.face_landmark_anchor_pose(o);
+          var buffer = _malloc(16 * 4);
+          HEAPF32.set(ret, buffer / 4);
+          return buffer;
+      };
+      
+  	
+      _zappar_barcode_finder_create = function(pipeline) {
+          var pipeline_val = pipeline;
+          var ret = zappar.barcode_finder_create(pipeline_val);
+          return ret;
+      };
+      _zappar_barcode_finder_destroy = function(o) {
+          var o_val = o;
+          var ret = zappar.barcode_finder_destroy(o_val);
+          return ret;
+      };
+      _zappar_barcode_finder_enabled_set = function(o, enabled) {
+          var enabled_val = enabled;
+          var ret = zappar.barcode_finder_enabled_set(o, enabled_val);
+          return ret;
+      };
+  	_zappar_barcode_finder_enabled = function(o) {
+          
+          var ret = zappar.barcode_finder_enabled(o);
+          return ret;
+      };
+  	_zappar_barcode_finder_found_number = function(o) {
+          
+          var ret = zappar.barcode_finder_found_number(o);
+          return ret;
+      };
+  	_zappar_barcode_finder_found_text = function(o, indx) {
+          var indx_val = indx;
+          var ret = zappar.barcode_finder_found_text(o, indx_val);
+          var bufferSize = lengthBytesUTF8(ret) + 1;
+          var buffer = _malloc(bufferSize);
+          stringToUTF8(ret, buffer, bufferSize);
+          return buffer;
+      };
+  	_zappar_barcode_finder_found_format = function(o, indx) {
+          var indx_val = indx;
+          var ret = zappar.barcode_finder_found_format(o, indx_val);
+          return ret;
+      };
+  	_zappar_barcode_finder_formats = function(o) {
+          
+          var ret = zappar.barcode_finder_formats(o);
+          return ret;
+      };
+  	_zappar_barcode_finder_formats_set = function(o, f) {
+          var f_val = f;
+          var ret = zappar.barcode_finder_formats_set(o, f_val);
+          return ret;
+      };
+      
+  	
+      _zappar_instant_world_tracker_create = function(pipeline) {
+          var pipeline_val = pipeline;
+          var ret = zappar.instant_world_tracker_create(pipeline_val);
+          return ret;
+      };
+      _zappar_instant_world_tracker_destroy = function(o) {
+          var o_val = o;
+          var ret = zappar.instant_world_tracker_destroy(o_val);
+          return ret;
+      };
+      _zappar_instant_world_tracker_enabled_set = function(o, enabled) {
+          var enabled_val = enabled;
+          var ret = zappar.instant_world_tracker_enabled_set(o, enabled_val);
+          return ret;
+      };
+  	_zappar_instant_world_tracker_enabled = function(o) {
+          
+          var ret = zappar.instant_world_tracker_enabled(o);
+          return ret;
+      };
+  	_zappar_instant_world_tracker_anchor_pose_raw = function(o) {
+          
+          var ret = zappar.instant_world_tracker_anchor_pose_raw(o);
+          var buffer = _malloc(16 * 4);
+          HEAPF32.set(ret, buffer / 4);
+          return buffer;
+      };
+  	_zappar_instant_world_tracker_anchor_pose_camera_relative = function(o, mirror) {
+          var mirror_val = mirror;
+          var ret = zappar.instant_world_tracker_anchor_pose_camera_relative(o, mirror_val);
+          var buffer = _malloc(16 * 4);
+          HEAPF32.set(ret, buffer / 4);
+          return buffer;
+      };
+  	_zappar_instant_world_tracker_anchor_pose = function(o, camera_pose, mirror) {
+          var camera_pose_val = new Float32Array(16);
+          camera_pose_val.set(HEAPF32.subarray(camera_pose/4, 16 + camera_pose / 4));
+  		var mirror_val = mirror;
+          var ret = zappar.instant_world_tracker_anchor_pose(o, camera_pose_val, mirror_val);
+          var buffer = _malloc(16 * 4);
+          HEAPF32.set(ret, buffer / 4);
+          return buffer;
+      };
+  	_zappar_instant_world_tracker_anchor_pose_set_from_camera_offset_raw = function(o, x, y, z, orientation) {
+          var x_val = x;
+  		var y_val = y;
+  		var z_val = z;
+  		var orientation_val = orientation;
+          var ret = zappar.instant_world_tracker_anchor_pose_set_from_camera_offset_raw(o, x_val, y_val, z_val, orientation_val);
+          return ret;
+      };
+  	_zappar_instant_world_tracker_anchor_pose_set_from_camera_offset = function(o, x, y, z, orientation) {
+          var x_val = x;
+  		var y_val = y;
+  		var z_val = z;
+  		var orientation_val = orientation;
+          var ret = zappar.instant_world_tracker_anchor_pose_set_from_camera_offset(o, x_val, y_val, z_val, orientation_val);
+          return ret;
+      };
+      
+  
+      }());
+  ;
 var ASSERTIONS = true;
 
 
@@ -16054,6 +17319,7 @@ var asmLibraryArg = {
   "JS_SystemInfo_GetOS": _JS_SystemInfo_GetOS,
   "JS_SystemInfo_GetPreferredDevicePixelRatio": _JS_SystemInfo_GetPreferredDevicePixelRatio,
   "JS_SystemInfo_GetScreenSize": _JS_SystemInfo_GetScreenSize,
+  "JS_SystemInfo_GetStreamingAssetsURL": _JS_SystemInfo_GetStreamingAssetsURL,
   "JS_SystemInfo_HasAstcHdr": _JS_SystemInfo_HasAstcHdr,
   "JS_SystemInfo_HasCursorLock": _JS_SystemInfo_HasCursorLock,
   "JS_SystemInfo_HasFullscreen": _JS_SystemInfo_HasFullscreen,
@@ -16279,6 +17545,7 @@ var asmLibraryArg = {
   "glGetActiveUniformBlockiv": _glGetActiveUniformBlockiv,
   "glGetActiveUniformsiv": _glGetActiveUniformsiv,
   "glGetAttribLocation": _glGetAttribLocation,
+  "glGetBufferParameteriv": _glGetBufferParameteriv,
   "glGetBufferSubData": _glGetBufferSubData,
   "glGetError": _glGetError,
   "glGetFramebufferAttachmentParameteriv": _glGetFramebufferAttachmentParameteriv,
@@ -16437,7 +17704,164 @@ var asmLibraryArg = {
   "invoke_vjjjiiii": invoke_vjjjiiii,
   "llvm_eh_typeid_for": _llvm_eh_typeid_for,
   "setTempRet0": _setTempRet0,
-  "strftime": _strftime
+  "strftime": _strftime,
+  "zappar_analytics_project_id_set": _zappar_analytics_project_id_set,
+  "zappar_barcode_finder_create": _zappar_barcode_finder_create,
+  "zappar_barcode_finder_destroy": _zappar_barcode_finder_destroy,
+  "zappar_barcode_finder_enabled": _zappar_barcode_finder_enabled,
+  "zappar_barcode_finder_enabled_set": _zappar_barcode_finder_enabled_set,
+  "zappar_barcode_finder_formats": _zappar_barcode_finder_formats,
+  "zappar_barcode_finder_formats_set": _zappar_barcode_finder_formats_set,
+  "zappar_barcode_finder_found_format": _zappar_barcode_finder_found_format,
+  "zappar_barcode_finder_found_number": _zappar_barcode_finder_found_number,
+  "zappar_barcode_finder_found_text": _zappar_barcode_finder_found_text,
+  "zappar_camera_count": _zappar_camera_count,
+  "zappar_camera_default_device_id": _zappar_camera_default_device_id,
+  "zappar_camera_id": _zappar_camera_id,
+  "zappar_camera_name": _zappar_camera_name,
+  "zappar_camera_source_create": _zappar_camera_source_create,
+  "zappar_camera_source_destroy": _zappar_camera_source_destroy,
+  "zappar_camera_source_pause": _zappar_camera_source_pause,
+  "zappar_camera_source_start": _zappar_camera_source_start,
+  "zappar_camera_user_facing": _zappar_camera_user_facing,
+  "zappar_face_landmark_anchor_pose": _zappar_face_landmark_anchor_pose,
+  "zappar_face_landmark_create": _zappar_face_landmark_create,
+  "zappar_face_landmark_destroy": _zappar_face_landmark_destroy,
+  "zappar_face_landmark_update": _zappar_face_landmark_update,
+  "zappar_face_mesh_create": _zappar_face_mesh_create,
+  "zappar_face_mesh_destroy": _zappar_face_mesh_destroy,
+  "zappar_face_mesh_indices": _zappar_face_mesh_indices,
+  "zappar_face_mesh_indices_size": _zappar_face_mesh_indices_size,
+  "zappar_face_mesh_load_default": _zappar_face_mesh_load_default,
+  "zappar_face_mesh_load_default_face": _zappar_face_mesh_load_default_face,
+  "zappar_face_mesh_load_default_full_head_simplified": _zappar_face_mesh_load_default_full_head_simplified,
+  "zappar_face_mesh_load_from_memory": _zappar_face_mesh_load_from_memory,
+  "zappar_face_mesh_loaded_version": _zappar_face_mesh_loaded_version,
+  "zappar_face_mesh_normals": _zappar_face_mesh_normals,
+  "zappar_face_mesh_normals_size": _zappar_face_mesh_normals_size,
+  "zappar_face_mesh_update": _zappar_face_mesh_update,
+  "zappar_face_mesh_uvs": _zappar_face_mesh_uvs,
+  "zappar_face_mesh_uvs_size": _zappar_face_mesh_uvs_size,
+  "zappar_face_mesh_vertices": _zappar_face_mesh_vertices,
+  "zappar_face_mesh_vertices_size": _zappar_face_mesh_vertices_size,
+  "zappar_face_tracker_anchor_count": _zappar_face_tracker_anchor_count,
+  "zappar_face_tracker_anchor_expression_coefficients": _zappar_face_tracker_anchor_expression_coefficients,
+  "zappar_face_tracker_anchor_id": _zappar_face_tracker_anchor_id,
+  "zappar_face_tracker_anchor_identity_coefficients": _zappar_face_tracker_anchor_identity_coefficients,
+  "zappar_face_tracker_anchor_pose": _zappar_face_tracker_anchor_pose,
+  "zappar_face_tracker_anchor_pose_camera_relative": _zappar_face_tracker_anchor_pose_camera_relative,
+  "zappar_face_tracker_anchor_pose_raw": _zappar_face_tracker_anchor_pose_raw,
+  "zappar_face_tracker_create": _zappar_face_tracker_create,
+  "zappar_face_tracker_destroy": _zappar_face_tracker_destroy,
+  "zappar_face_tracker_enabled": _zappar_face_tracker_enabled,
+  "zappar_face_tracker_enabled_set": _zappar_face_tracker_enabled_set,
+  "zappar_face_tracker_max_faces": _zappar_face_tracker_max_faces,
+  "zappar_face_tracker_max_faces_set": _zappar_face_tracker_max_faces_set,
+  "zappar_face_tracker_model_load_default": _zappar_face_tracker_model_load_default,
+  "zappar_face_tracker_model_load_from_memory": _zappar_face_tracker_model_load_from_memory,
+  "zappar_face_tracker_model_loaded_version": _zappar_face_tracker_model_loaded_version,
+  "zappar_has_initialized": _zappar_has_initialized,
+  "zappar_image_tracker_anchor_count": _zappar_image_tracker_anchor_count,
+  "zappar_image_tracker_anchor_id": _zappar_image_tracker_anchor_id,
+  "zappar_image_tracker_anchor_pose": _zappar_image_tracker_anchor_pose,
+  "zappar_image_tracker_anchor_pose_camera_relative": _zappar_image_tracker_anchor_pose_camera_relative,
+  "zappar_image_tracker_anchor_pose_raw": _zappar_image_tracker_anchor_pose_raw,
+  "zappar_image_tracker_create": _zappar_image_tracker_create,
+  "zappar_image_tracker_destroy": _zappar_image_tracker_destroy,
+  "zappar_image_tracker_enabled": _zappar_image_tracker_enabled,
+  "zappar_image_tracker_enabled_set": _zappar_image_tracker_enabled_set,
+  "zappar_image_tracker_target_count": _zappar_image_tracker_target_count,
+  "zappar_image_tracker_target_load_from_memory": _zappar_image_tracker_target_load_from_memory,
+  "zappar_image_tracker_target_loaded_version": _zappar_image_tracker_target_loaded_version,
+  "zappar_image_tracker_target_physical_scale_factor": _zappar_image_tracker_target_physical_scale_factor,
+  "zappar_image_tracker_target_preview_compressed": _zappar_image_tracker_target_preview_compressed,
+  "zappar_image_tracker_target_preview_compressed_mimetype": _zappar_image_tracker_target_preview_compressed_mimetype,
+  "zappar_image_tracker_target_preview_compressed_size": _zappar_image_tracker_target_preview_compressed_size,
+  "zappar_image_tracker_target_preview_mesh_indices": _zappar_image_tracker_target_preview_mesh_indices,
+  "zappar_image_tracker_target_preview_mesh_indices_size": _zappar_image_tracker_target_preview_mesh_indices_size,
+  "zappar_image_tracker_target_preview_mesh_normals": _zappar_image_tracker_target_preview_mesh_normals,
+  "zappar_image_tracker_target_preview_mesh_normals_size": _zappar_image_tracker_target_preview_mesh_normals_size,
+  "zappar_image_tracker_target_preview_mesh_uvs": _zappar_image_tracker_target_preview_mesh_uvs,
+  "zappar_image_tracker_target_preview_mesh_uvs_size": _zappar_image_tracker_target_preview_mesh_uvs_size,
+  "zappar_image_tracker_target_preview_mesh_vertices": _zappar_image_tracker_target_preview_mesh_vertices,
+  "zappar_image_tracker_target_preview_mesh_vertices_size": _zappar_image_tracker_target_preview_mesh_vertices_size,
+  "zappar_image_tracker_target_preview_rgba": _zappar_image_tracker_target_preview_rgba,
+  "zappar_image_tracker_target_preview_rgba_height": _zappar_image_tracker_target_preview_rgba_height,
+  "zappar_image_tracker_target_preview_rgba_size": _zappar_image_tracker_target_preview_rgba_size,
+  "zappar_image_tracker_target_preview_rgba_width": _zappar_image_tracker_target_preview_rgba_width,
+  "zappar_image_tracker_target_radius_bottom": _zappar_image_tracker_target_radius_bottom,
+  "zappar_image_tracker_target_radius_top": _zappar_image_tracker_target_radius_top,
+  "zappar_image_tracker_target_side_length": _zappar_image_tracker_target_side_length,
+  "zappar_image_tracker_target_type": _zappar_image_tracker_target_type,
+  "zappar_initialize": _zappar_initialize,
+  "zappar_instant_world_tracker_anchor_pose": _zappar_instant_world_tracker_anchor_pose,
+  "zappar_instant_world_tracker_anchor_pose_camera_relative": _zappar_instant_world_tracker_anchor_pose_camera_relative,
+  "zappar_instant_world_tracker_anchor_pose_raw": _zappar_instant_world_tracker_anchor_pose_raw,
+  "zappar_instant_world_tracker_anchor_pose_set_from_camera_offset": _zappar_instant_world_tracker_anchor_pose_set_from_camera_offset,
+  "zappar_instant_world_tracker_anchor_pose_set_from_camera_offset_raw": _zappar_instant_world_tracker_anchor_pose_set_from_camera_offset_raw,
+  "zappar_instant_world_tracker_create": _zappar_instant_world_tracker_create,
+  "zappar_instant_world_tracker_destroy": _zappar_instant_world_tracker_destroy,
+  "zappar_instant_world_tracker_enabled": _zappar_instant_world_tracker_enabled,
+  "zappar_instant_world_tracker_enabled_set": _zappar_instant_world_tracker_enabled_set,
+  "zappar_is_visible_webgl": _zappar_is_visible_webgl,
+  "zappar_issue_js_plugin_face_mesh_normals": zappar_issue_js_plugin_face_mesh_normals,
+  "zappar_issue_js_plugin_face_mesh_normals_size": zappar_issue_js_plugin_face_mesh_normals_size,
+  "zappar_issue_js_plugin_face_mesh_uvs": zappar_issue_js_plugin_face_mesh_uvs,
+  "zappar_issue_js_plugin_face_mesh_uvs_size": zappar_issue_js_plugin_face_mesh_uvs_size,
+  "zappar_issue_js_plugin_face_mesh_vertices": zappar_issue_js_plugin_face_mesh_vertices,
+  "zappar_issue_js_plugin_face_mesh_vertices_size": zappar_issue_js_plugin_face_mesh_vertices_size,
+  "zappar_issue_js_plugin_render_event": zappar_issue_js_plugin_render_event,
+  "zappar_issue_js_plugin_upload_gl_event": zappar_issue_js_plugin_upload_gl_event,
+  "zappar_loaded": _zappar_loaded,
+  "zappar_log_level_set": _zappar_log_level_set,
+  "zappar_permission_denied_any": _zappar_permission_denied_any,
+  "zappar_permission_denied_camera": _zappar_permission_denied_camera,
+  "zappar_permission_denied_motion": _zappar_permission_denied_motion,
+  "zappar_permission_denied_ui": _zappar_permission_denied_ui,
+  "zappar_permission_granted_all": _zappar_permission_granted_all,
+  "zappar_permission_granted_camera": _zappar_permission_granted_camera,
+  "zappar_permission_granted_motion": _zappar_permission_granted_motion,
+  "zappar_permission_request_all": _zappar_permission_request_all,
+  "zappar_permission_request_camera": _zappar_permission_request_camera,
+  "zappar_permission_request_motion": _zappar_permission_request_motion,
+  "zappar_permission_request_ui": _zappar_permission_request_ui,
+  "zappar_pipeline_camera_frame_camera_attitude": _zappar_pipeline_camera_frame_camera_attitude,
+  "zappar_pipeline_camera_frame_device_attitude": _zappar_pipeline_camera_frame_device_attitude,
+  "zappar_pipeline_camera_frame_submit": _zappar_pipeline_camera_frame_submit,
+  "zappar_pipeline_camera_frame_texture_dx11": _zappar_pipeline_camera_frame_texture_dx11,
+  "zappar_pipeline_camera_frame_texture_gl": _zappar_pipeline_camera_frame_texture_gl,
+  "zappar_pipeline_camera_frame_texture_matrix": _zappar_pipeline_camera_frame_texture_matrix,
+  "zappar_pipeline_camera_frame_texture_metal": _zappar_pipeline_camera_frame_texture_metal,
+  "zappar_pipeline_camera_frame_user_data": _zappar_pipeline_camera_frame_user_data,
+  "zappar_pipeline_camera_frame_user_facing": _zappar_pipeline_camera_frame_user_facing,
+  "zappar_pipeline_camera_model": _zappar_pipeline_camera_model,
+  "zappar_pipeline_camera_pose_default": _zappar_pipeline_camera_pose_default,
+  "zappar_pipeline_camera_pose_with_attitude": _zappar_pipeline_camera_pose_with_attitude,
+  "zappar_pipeline_camera_pose_with_origin": _zappar_pipeline_camera_pose_with_origin,
+  "zappar_pipeline_create": _zappar_pipeline_create,
+  "zappar_pipeline_destroy": _zappar_pipeline_destroy,
+  "zappar_pipeline_frame_number": _zappar_pipeline_frame_number,
+  "zappar_pipeline_frame_update": _zappar_pipeline_frame_update,
+  "zappar_pipeline_gl_context_set": _zappar_pipeline_gl_context_set,
+  "zappar_pipeline_motion_accelerometer_submit": _zappar_pipeline_motion_accelerometer_submit,
+  "zappar_pipeline_motion_attitude_matrix_submit": _zappar_pipeline_motion_attitude_matrix_submit,
+  "zappar_pipeline_motion_attitude_submit": _zappar_pipeline_motion_attitude_submit,
+  "zappar_pipeline_motion_rotation_rate_submit": _zappar_pipeline_motion_rotation_rate_submit,
+  "zappar_pipeline_sequence_record_clear": _zappar_pipeline_sequence_record_clear,
+  "zappar_pipeline_sequence_record_data": _zappar_pipeline_sequence_record_data,
+  "zappar_pipeline_sequence_record_data_size": _zappar_pipeline_sequence_record_data_size,
+  "zappar_pipeline_sequence_record_device_attitude_matrices_set": _zappar_pipeline_sequence_record_device_attitude_matrices_set,
+  "zappar_pipeline_sequence_record_start": _zappar_pipeline_sequence_record_start,
+  "zappar_pipeline_sequence_record_stop": _zappar_pipeline_sequence_record_stop,
+  "zappar_pipeline_set": _zappar_pipeline_set,
+  "zappar_projection_matrix_from_camera_model": _zappar_projection_matrix_from_camera_model,
+  "zappar_projection_matrix_from_camera_model_ext": _zappar_projection_matrix_from_camera_model_ext,
+  "zappar_sequence_source_create": _zappar_sequence_source_create,
+  "zappar_sequence_source_destroy": _zappar_sequence_source_destroy,
+  "zappar_sequence_source_load_from_memory": _zappar_sequence_source_load_from_memory,
+  "zappar_sequence_source_max_playback_fps_set": _zappar_sequence_source_max_playback_fps_set,
+  "zappar_sequence_source_pause": _zappar_sequence_source_pause,
+  "zappar_sequence_source_start": _zappar_sequence_source_start
 };
 var asm = createWasm();
 /** @type {function(...*):?} */
@@ -16608,28 +18032,13 @@ var dynCall_iiiidii = Module["dynCall_iiiidii"] = createExportWrapper("dynCall_i
 var dynCall_iiiijii = Module["dynCall_iiiijii"] = createExportWrapper("dynCall_iiiijii");
 
 /** @type {function(...*):?} */
-var dynCall_vidi = Module["dynCall_vidi"] = createExportWrapper("dynCall_vidi");
-
-/** @type {function(...*):?} */
-var dynCall_viidi = Module["dynCall_viidi"] = createExportWrapper("dynCall_viidi");
+var dynCall_viiiiiii = Module["dynCall_viiiiiii"] = createExportWrapper("dynCall_viiiiiii");
 
 /** @type {function(...*):?} */
 var dynCall_j = Module["dynCall_j"] = createExportWrapper("dynCall_j");
 
 /** @type {function(...*):?} */
 var dynCall_ji = Module["dynCall_ji"] = createExportWrapper("dynCall_ji");
-
-/** @type {function(...*):?} */
-var dynCall_iiijii = Module["dynCall_iiijii"] = createExportWrapper("dynCall_iiijii");
-
-/** @type {function(...*):?} */
-var dynCall_viiji = Module["dynCall_viiji"] = createExportWrapper("dynCall_viiji");
-
-/** @type {function(...*):?} */
-var dynCall_iiifii = Module["dynCall_iiifii"] = createExportWrapper("dynCall_iiifii");
-
-/** @type {function(...*):?} */
-var dynCall_viifi = Module["dynCall_viifi"] = createExportWrapper("dynCall_viifi");
 
 /** @type {function(...*):?} */
 var dynCall_jiii = Module["dynCall_jiii"] = createExportWrapper("dynCall_jiii");
@@ -16641,40 +18050,94 @@ var dynCall_iiji = Module["dynCall_iiji"] = createExportWrapper("dynCall_iiji");
 var dynCall_viiiiiiiii = Module["dynCall_viiiiiiiii"] = createExportWrapper("dynCall_viiiiiiiii");
 
 /** @type {function(...*):?} */
-var dynCall_fii = Module["dynCall_fii"] = createExportWrapper("dynCall_fii");
-
-/** @type {function(...*):?} */
-var dynCall_iiiiiiiiiiii = Module["dynCall_iiiiiiiiiiii"] = createExportWrapper("dynCall_iiiiiiiiiiii");
-
-/** @type {function(...*):?} */
 var dynCall_iifi = Module["dynCall_iifi"] = createExportWrapper("dynCall_iifi");
 
 /** @type {function(...*):?} */
-var dynCall_iijiii = Module["dynCall_iijiii"] = createExportWrapper("dynCall_iijiii");
+var dynCall_fiii = Module["dynCall_fiii"] = createExportWrapper("dynCall_fiii");
 
 /** @type {function(...*):?} */
-var dynCall_vijii = Module["dynCall_vijii"] = createExportWrapper("dynCall_vijii");
+var dynCall_vidi = Module["dynCall_vidi"] = createExportWrapper("dynCall_vidi");
 
 /** @type {function(...*):?} */
-var dynCall_viiiiiii = Module["dynCall_viiiiiii"] = createExportWrapper("dynCall_viiiiiii");
+var dynCall_viidi = Module["dynCall_viidi"] = createExportWrapper("dynCall_viidi");
+
+/** @type {function(...*):?} */
+var dynCall_viifi = Module["dynCall_viifi"] = createExportWrapper("dynCall_viifi");
+
+/** @type {function(...*):?} */
+var dynCall_viiiji = Module["dynCall_viiiji"] = createExportWrapper("dynCall_viiiji");
 
 /** @type {function(...*):?} */
 var dynCall_iiiifii = Module["dynCall_iiiifii"] = createExportWrapper("dynCall_iiiifii");
 
 /** @type {function(...*):?} */
-var dynCall_viiiifii = Module["dynCall_viiiifii"] = createExportWrapper("dynCall_viiiifii");
+var dynCall_iiifii = Module["dynCall_iiifii"] = createExportWrapper("dynCall_iiifii");
 
 /** @type {function(...*):?} */
-var dynCall_vifi = Module["dynCall_vifi"] = createExportWrapper("dynCall_vifi");
+var dynCall_viiiifii = Module["dynCall_viiiifii"] = createExportWrapper("dynCall_viiiifii");
 
 /** @type {function(...*):?} */
 var dynCall_viiffi = Module["dynCall_viiffi"] = createExportWrapper("dynCall_viiffi");
 
 /** @type {function(...*):?} */
+var dynCall_diidi = Module["dynCall_diidi"] = createExportWrapper("dynCall_diidi");
+
+/** @type {function(...*):?} */
+var dynCall_jiiji = Module["dynCall_jiiji"] = createExportWrapper("dynCall_jiiji");
+
+/** @type {function(...*):?} */
+var dynCall_fiifi = Module["dynCall_fiifi"] = createExportWrapper("dynCall_fiifi");
+
+/** @type {function(...*):?} */
+var dynCall_iiffi = Module["dynCall_iiffi"] = createExportWrapper("dynCall_iiffi");
+
+/** @type {function(...*):?} */
+var dynCall_iiiifi = Module["dynCall_iiiifi"] = createExportWrapper("dynCall_iiiifi");
+
+/** @type {function(...*):?} */
+var dynCall_iiiiiiiiii = Module["dynCall_iiiiiiiiii"] = createExportWrapper("dynCall_iiiiiiiiii");
+
+/** @type {function(...*):?} */
+var dynCall_fffi = Module["dynCall_fffi"] = createExportWrapper("dynCall_fffi");
+
+/** @type {function(...*):?} */
+var dynCall_viifii = Module["dynCall_viifii"] = createExportWrapper("dynCall_viifii");
+
+/** @type {function(...*):?} */
+var dynCall_vifi = Module["dynCall_vifi"] = createExportWrapper("dynCall_vifi");
+
+/** @type {function(...*):?} */
 var dynCall_vifii = Module["dynCall_vifii"] = createExportWrapper("dynCall_vifii");
 
 /** @type {function(...*):?} */
-var dynCall_fiii = Module["dynCall_fiii"] = createExportWrapper("dynCall_fiii");
+var dynCall_viiiiiiiiii = Module["dynCall_viiiiiiiiii"] = createExportWrapper("dynCall_viiiiiiiiii");
+
+/** @type {function(...*):?} */
+var dynCall_iiiiiiiiiji = Module["dynCall_iiiiiiiiiji"] = createExportWrapper("dynCall_iiiiiiiiiji");
+
+/** @type {function(...*):?} */
+var dynCall_vji = Module["dynCall_vji"] = createExportWrapper("dynCall_vji");
+
+/** @type {function(...*):?} */
+var dynCall_diii = Module["dynCall_diii"] = createExportWrapper("dynCall_diii");
+
+/** @type {function(...*):?} */
+var dynCall_iiiiiiiii = Module["dynCall_iiiiiiiii"] = createExportWrapper("dynCall_iiiiiiiii");
+
+/** @type {function(...*):?} */
+var dynCall_jijii = Module["dynCall_jijii"] = createExportWrapper("dynCall_jijii");
+
+/** @type {function(...*):?} */
+var dynCall_vfiii = Module["dynCall_vfiii"] = createExportWrapper("dynCall_vfiii");
+
+/** @type {function(...*):?} */
+var dynCall_iiijii = Module["dynCall_iiijii"] = createExportWrapper("dynCall_iiijii");
+
+/** @type {function(...*):?} */
+var dynCall_viiji = Module["dynCall_viiji"] = createExportWrapper("dynCall_viiji");
+
+/** @type {function(...*):?} */
+var dynCall_ijji = Module["dynCall_ijji"] = createExportWrapper("dynCall_ijji");
 
 /** @type {function(...*):?} */
 var dynCall_viiiiiiiiiii = Module["dynCall_viiiiiiiiiii"] = createExportWrapper("dynCall_viiiiiiiiiii");
@@ -16704,61 +18167,16 @@ var dynCall_iiiijjii = Module["dynCall_iiiijjii"] = createExportWrapper("dynCall
 var dynCall_iijii = Module["dynCall_iijii"] = createExportWrapper("dynCall_iijii");
 
 /** @type {function(...*):?} */
-var dynCall_viiiiiiiiii = Module["dynCall_viiiiiiiiii"] = createExportWrapper("dynCall_viiiiiiiiii");
+var dynCall_iijiii = Module["dynCall_iijiii"] = createExportWrapper("dynCall_iijiii");
 
 /** @type {function(...*):?} */
-var dynCall_iiiiiiiii = Module["dynCall_iiiiiiiii"] = createExportWrapper("dynCall_iiiiiiiii");
-
-/** @type {function(...*):?} */
-var dynCall_ijji = Module["dynCall_ijji"] = createExportWrapper("dynCall_ijji");
-
-/** @type {function(...*):?} */
-var dynCall_iiiiij = Module["dynCall_iiiiij"] = createExportWrapper("dynCall_iiiiij");
-
-/** @type {function(...*):?} */
-var dynCall_iiiiiiiiii = Module["dynCall_iiiiiiiiii"] = createExportWrapper("dynCall_iiiiiiiiii");
-
-/** @type {function(...*):?} */
-var dynCall_iiiiijiii = Module["dynCall_iiiiijiii"] = createExportWrapper("dynCall_iiiiijiii");
-
-/** @type {function(...*):?} */
-var dynCall_iiiiiiiiiji = Module["dynCall_iiiiiiiiiji"] = createExportWrapper("dynCall_iiiiiiiiiji");
-
-/** @type {function(...*):?} */
-var dynCall_vji = Module["dynCall_vji"] = createExportWrapper("dynCall_vji");
-
-/** @type {function(...*):?} */
-var dynCall_diii = Module["dynCall_diii"] = createExportWrapper("dynCall_diii");
-
-/** @type {function(...*):?} */
-var dynCall_vfiii = Module["dynCall_vfiii"] = createExportWrapper("dynCall_vfiii");
-
-/** @type {function(...*):?} */
-var dynCall_iiiifi = Module["dynCall_iiiifi"] = createExportWrapper("dynCall_iiiifi");
-
-/** @type {function(...*):?} */
-var dynCall_jjji = Module["dynCall_jjji"] = createExportWrapper("dynCall_jjji");
+var dynCall_vijii = Module["dynCall_vijii"] = createExportWrapper("dynCall_vijii");
 
 /** @type {function(...*):?} */
 var dynCall_iidi = Module["dynCall_iidi"] = createExportWrapper("dynCall_iidi");
 
 /** @type {function(...*):?} */
-var dynCall_didi = Module["dynCall_didi"] = createExportWrapper("dynCall_didi");
-
-/** @type {function(...*):?} */
-var dynCall_fifi = Module["dynCall_fifi"] = createExportWrapper("dynCall_fifi");
-
-/** @type {function(...*):?} */
-var dynCall_diidi = Module["dynCall_diidi"] = createExportWrapper("dynCall_diidi");
-
-/** @type {function(...*):?} */
-var dynCall_jiiji = Module["dynCall_jiiji"] = createExportWrapper("dynCall_jiiji");
-
-/** @type {function(...*):?} */
-var dynCall_fiifi = Module["dynCall_fiifi"] = createExportWrapper("dynCall_fiifi");
-
-/** @type {function(...*):?} */
-var dynCall_iiffi = Module["dynCall_iiffi"] = createExportWrapper("dynCall_iiffi");
+var dynCall_jjji = Module["dynCall_jjji"] = createExportWrapper("dynCall_jjji");
 
 /** @type {function(...*):?} */
 var dynCall_fi = Module["dynCall_fi"] = createExportWrapper("dynCall_fi");
@@ -16770,16 +18188,28 @@ var dynCall_iiifi = Module["dynCall_iiifi"] = createExportWrapper("dynCall_iiifi
 var dynCall_viiiifi = Module["dynCall_viiiifi"] = createExportWrapper("dynCall_viiiifi");
 
 /** @type {function(...*):?} */
-var dynCall_viiiji = Module["dynCall_viiiji"] = createExportWrapper("dynCall_viiiji");
+var dynCall_fii = Module["dynCall_fii"] = createExportWrapper("dynCall_fii");
 
 /** @type {function(...*):?} */
-var dynCall_fffi = Module["dynCall_fffi"] = createExportWrapper("dynCall_fffi");
+var dynCall_iiiiiiiiiiii = Module["dynCall_iiiiiiiiiiii"] = createExportWrapper("dynCall_iiiiiiiiiiii");
 
 /** @type {function(...*):?} */
-var dynCall_viifii = Module["dynCall_viifii"] = createExportWrapper("dynCall_viifii");
+var dynCall_fiiffi = Module["dynCall_fiiffi"] = createExportWrapper("dynCall_fiiffi");
 
 /** @type {function(...*):?} */
-var dynCall_jijii = Module["dynCall_jijii"] = createExportWrapper("dynCall_jijii");
+var dynCall_viiififii = Module["dynCall_viiififii"] = createExportWrapper("dynCall_viiififii");
+
+/** @type {function(...*):?} */
+var dynCall_didi = Module["dynCall_didi"] = createExportWrapper("dynCall_didi");
+
+/** @type {function(...*):?} */
+var dynCall_fifi = Module["dynCall_fifi"] = createExportWrapper("dynCall_fifi");
+
+/** @type {function(...*):?} */
+var dynCall_iiiiij = Module["dynCall_iiiiij"] = createExportWrapper("dynCall_iiiiij");
+
+/** @type {function(...*):?} */
+var dynCall_iiiiijiii = Module["dynCall_iiiiijiii"] = createExportWrapper("dynCall_iiiiijiii");
 
 /** @type {function(...*):?} */
 var dynCall_iji = Module["dynCall_iji"] = createExportWrapper("dynCall_iji");
@@ -16789,12 +18219,6 @@ var dynCall_dii = Module["dynCall_dii"] = createExportWrapper("dynCall_dii");
 
 /** @type {function(...*):?} */
 var dynCall_iijji = Module["dynCall_iijji"] = createExportWrapper("dynCall_iijji");
-
-/** @type {function(...*):?} */
-var dynCall_fiiffi = Module["dynCall_fiiffi"] = createExportWrapper("dynCall_fiiffi");
-
-/** @type {function(...*):?} */
-var dynCall_viiififii = Module["dynCall_viiififii"] = createExportWrapper("dynCall_viiififii");
 
 /** @type {function(...*):?} */
 var dynCall_iiddi = Module["dynCall_iiddi"] = createExportWrapper("dynCall_iiddi");
@@ -16923,6 +18347,15 @@ var dynCall_viiiffii = Module["dynCall_viiiffii"] = createExportWrapper("dynCall
 var dynCall_vifffi = Module["dynCall_vifffi"] = createExportWrapper("dynCall_vifffi");
 
 /** @type {function(...*):?} */
+var dynCall_viffffffi = Module["dynCall_viffffffi"] = createExportWrapper("dynCall_viffffffi");
+
+/** @type {function(...*):?} */
+var dynCall_fiiii = Module["dynCall_fiiii"] = createExportWrapper("dynCall_fiiii");
+
+/** @type {function(...*):?} */
+var dynCall_vffffffii = Module["dynCall_vffffffii"] = createExportWrapper("dynCall_vffffffii");
+
+/** @type {function(...*):?} */
 var dynCall_viffi = Module["dynCall_viffi"] = createExportWrapper("dynCall_viffi");
 
 /** @type {function(...*):?} */
@@ -17046,9 +18479,6 @@ var dynCall_viiiffffiiii = Module["dynCall_viiiffffiiii"] = createExportWrapper(
 var dynCall_viifffffffiiiii = Module["dynCall_viifffffffiiiii"] = createExportWrapper("dynCall_viifffffffiiiii");
 
 /** @type {function(...*):?} */
-var dynCall_fiiii = Module["dynCall_fiiii"] = createExportWrapper("dynCall_fiiii");
-
-/** @type {function(...*):?} */
 var dynCall_fiiiii = Module["dynCall_fiiiii"] = createExportWrapper("dynCall_fiiiii");
 
 /** @type {function(...*):?} */
@@ -17101,9 +18531,6 @@ var dynCall_viiffiiiiiiiiii = Module["dynCall_viiffiiiiiiiiii"] = createExportWr
 
 /** @type {function(...*):?} */
 var dynCall_viiffiiiiiii = Module["dynCall_viiffiiiiiii"] = createExportWrapper("dynCall_viiffiiiiiii");
-
-/** @type {function(...*):?} */
-var dynCall_viffffffi = Module["dynCall_viffffffi"] = createExportWrapper("dynCall_viffffffi");
 
 /** @type {function(...*):?} */
 var dynCall_iiiffiiii = Module["dynCall_iiiffiiii"] = createExportWrapper("dynCall_iiiffiiii");
@@ -17200,6 +18627,15 @@ var dynCall_viiiiffffii = Module["dynCall_viiiiffffii"] = createExportWrapper("d
 
 /** @type {function(...*):?} */
 var dynCall_fiiiiii = Module["dynCall_fiiiiii"] = createExportWrapper("dynCall_fiiiiii");
+
+/** @type {function(...*):?} */
+var dynCall_iiiiffi = Module["dynCall_iiiiffi"] = createExportWrapper("dynCall_iiiiffi");
+
+/** @type {function(...*):?} */
+var dynCall_vidfffi = Module["dynCall_vidfffi"] = createExportWrapper("dynCall_vidfffi");
+
+/** @type {function(...*):?} */
+var dynCall_viiiiffii = Module["dynCall_viiiiffii"] = createExportWrapper("dynCall_viiiiffii");
 
 /** @type {function(...*):?} */
 var dynCall_idiiii = Module["dynCall_idiiii"] = createExportWrapper("dynCall_idiiii");
@@ -17616,6 +19052,9 @@ var dynCall_vfff = Module["dynCall_vfff"] = createExportWrapper("dynCall_vfff");
 var dynCall_f = Module["dynCall_f"] = createExportWrapper("dynCall_f");
 
 /** @type {function(...*):?} */
+var dynCall_vffffffi = Module["dynCall_vffffffi"] = createExportWrapper("dynCall_vffffffi");
+
+/** @type {function(...*):?} */
 var dynCall_ff = Module["dynCall_ff"] = createExportWrapper("dynCall_ff");
 
 /** @type {function(...*):?} */
@@ -17896,6 +19335,61 @@ function invoke_iiiidii(index,a1,a2,a3,a4,a5,a6) {
   }
 }
 
+function invoke_iiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8) {
+  var sp = stackSave();
+  try {
+    return dynCall_iiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8);
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_viiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9) {
+  var sp = stackSave();
+  try {
+    dynCall_viiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9);
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_viffi(index,a1,a2,a3,a4) {
+  var sp = stackSave();
+  try {
+    dynCall_viffi(index,a1,a2,a3,a4);
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_iifi(index,a1,a2,a3) {
+  var sp = stackSave();
+  try {
+    return dynCall_iifi(index,a1,a2,a3);
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_viifi(index,a1,a2,a3,a4) {
+  var sp = stackSave();
+  try {
+    dynCall_viifi(index,a1,a2,a3,a4);
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0) throw e;
+    _setThrew(1, 0);
+  }
+}
+
 function invoke_vidi(index,a1,a2,a3) {
   var sp = stackSave();
   try {
@@ -17929,10 +19423,10 @@ function invoke_dii(index,a1,a2) {
   }
 }
 
-function invoke_iiifii(index,a1,a2,a3,a4,a5) {
+function invoke_viiffi(index,a1,a2,a3,a4,a5) {
   var sp = stackSave();
   try {
-    return dynCall_iiifii(index,a1,a2,a3,a4,a5);
+    dynCall_viiffi(index,a1,a2,a3,a4,a5);
   } catch(e) {
     stackRestore(sp);
     if (e !== e+0) throw e;
@@ -17940,10 +19434,10 @@ function invoke_iiifii(index,a1,a2,a3,a4,a5) {
   }
 }
 
-function invoke_viifi(index,a1,a2,a3,a4) {
+function invoke_iiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9) {
   var sp = stackSave();
   try {
-    dynCall_viifi(index,a1,a2,a3,a4);
+    return dynCall_iiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9);
   } catch(e) {
     stackRestore(sp);
     if (e !== e+0) throw e;
@@ -17951,10 +19445,21 @@ function invoke_viifi(index,a1,a2,a3,a4) {
   }
 }
 
-function invoke_viiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9) {
+function invoke_fffi(index,a1,a2,a3) {
   var sp = stackSave();
   try {
-    dynCall_viiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9);
+    return dynCall_fffi(index,a1,a2,a3);
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_viifii(index,a1,a2,a3,a4,a5) {
+  var sp = stackSave();
+  try {
+    dynCall_viifii(index,a1,a2,a3,a4,a5);
   } catch(e) {
     stackRestore(sp);
     if (e !== e+0) throw e;
@@ -17984,54 +19489,10 @@ function invoke_fii(index,a1,a2) {
   }
 }
 
-function invoke_iifi(index,a1,a2,a3) {
-  var sp = stackSave();
-  try {
-    return dynCall_iifi(index,a1,a2,a3);
-  } catch(e) {
-    stackRestore(sp);
-    if (e !== e+0) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_viiffi(index,a1,a2,a3,a4,a5) {
-  var sp = stackSave();
-  try {
-    dynCall_viiffi(index,a1,a2,a3,a4,a5);
-  } catch(e) {
-    stackRestore(sp);
-    if (e !== e+0) throw e;
-    _setThrew(1, 0);
-  }
-}
-
 function invoke_vifii(index,a1,a2,a3,a4) {
   var sp = stackSave();
   try {
     dynCall_vifii(index,a1,a2,a3,a4);
-  } catch(e) {
-    stackRestore(sp);
-    if (e !== e+0) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_iiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8) {
-  var sp = stackSave();
-  try {
-    return dynCall_iiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8);
-  } catch(e) {
-    stackRestore(sp);
-    if (e !== e+0) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_iiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9) {
-  var sp = stackSave();
-  try {
-    return dynCall_iiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9);
   } catch(e) {
     stackRestore(sp);
     if (e !== e+0) throw e;
@@ -18050,10 +19511,10 @@ function invoke_vfiii(index,a1,a2,a3,a4) {
   }
 }
 
-function invoke_viffi(index,a1,a2,a3,a4) {
+function invoke_iiifii(index,a1,a2,a3,a4,a5) {
   var sp = stackSave();
   try {
-    dynCall_viffi(index,a1,a2,a3,a4);
+    return dynCall_iiifii(index,a1,a2,a3,a4,a5);
   } catch(e) {
     stackRestore(sp);
     if (e !== e+0) throw e;
@@ -18087,28 +19548,6 @@ function invoke_viiiifi(index,a1,a2,a3,a4,a5,a6) {
   var sp = stackSave();
   try {
     dynCall_viiiifi(index,a1,a2,a3,a4,a5,a6);
-  } catch(e) {
-    stackRestore(sp);
-    if (e !== e+0) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_fffi(index,a1,a2,a3) {
-  var sp = stackSave();
-  try {
-    return dynCall_fffi(index,a1,a2,a3);
-  } catch(e) {
-    stackRestore(sp);
-    if (e !== e+0) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_viifii(index,a1,a2,a3,a4,a5) {
-  var sp = stackSave();
-  try {
-    dynCall_viifii(index,a1,a2,a3,a4,a5);
   } catch(e) {
     stackRestore(sp);
     if (e !== e+0) throw e;
@@ -18237,6 +19676,17 @@ function invoke_iiiijii(index,a1,a2,a3,a4,a5,a6,a7) {
   }
 }
 
+function invoke_jiiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10) {
+  var sp = stackSave();
+  try {
+    return dynCall_jiiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10);
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0) throw e;
+    _setThrew(1, 0);
+  }
+}
+
 function invoke_jiii(index,a1,a2,a3) {
   var sp = stackSave();
   try {
@@ -18248,10 +19698,65 @@ function invoke_jiii(index,a1,a2,a3) {
   }
 }
 
-function invoke_jiiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10) {
+function invoke_iiji(index,a1,a2,a3,a4) {
   var sp = stackSave();
   try {
-    return dynCall_jiiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10);
+    return dynCall_iiji(index,a1,a2,a3,a4);
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_iiiiiiiiiji(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11) {
+  var sp = stackSave();
+  try {
+    return dynCall_iiiiiiiiiji(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11);
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_vji(index,a1,a2,a3) {
+  var sp = stackSave();
+  try {
+    dynCall_vji(index,a1,a2,a3);
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_viji(index,a1,a2,a3,a4) {
+  var sp = stackSave();
+  try {
+    dynCall_viji(index,a1,a2,a3,a4);
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_viiiji(index,a1,a2,a3,a4,a5,a6) {
+  var sp = stackSave();
+  try {
+    dynCall_viiiji(index,a1,a2,a3,a4,a5,a6);
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_jijii(index,a1,a2,a3,a4,a5) {
+  var sp = stackSave();
+  try {
+    return dynCall_jijii(index,a1,a2,a3,a4,a5);
   } catch(e) {
     stackRestore(sp);
     if (e !== e+0) throw e;
@@ -18281,10 +19786,10 @@ function invoke_viiji(index,a1,a2,a3,a4,a5) {
   }
 }
 
-function invoke_iiji(index,a1,a2,a3,a4) {
+function invoke_ijji(index,a1,a2,a3,a4,a5) {
   var sp = stackSave();
   try {
-    return dynCall_iiji(index,a1,a2,a3,a4);
+    return dynCall_ijji(index,a1,a2,a3,a4,a5);
   } catch(e) {
     stackRestore(sp);
     if (e !== e+0) throw e;
@@ -18336,17 +19841,6 @@ function invoke_iijiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9) {
   }
 }
 
-function invoke_viji(index,a1,a2,a3,a4) {
-  var sp = stackSave();
-  try {
-    dynCall_viji(index,a1,a2,a3,a4);
-  } catch(e) {
-    stackRestore(sp);
-    if (e !== e+0) throw e;
-    _setThrew(1, 0);
-  }
-}
-
 function invoke_iijiii(index,a1,a2,a3,a4,a5,a6) {
   var sp = stackSave();
   try {
@@ -18369,50 +19863,6 @@ function invoke_vijii(index,a1,a2,a3,a4,a5) {
   }
 }
 
-function invoke_ijji(index,a1,a2,a3,a4,a5) {
-  var sp = stackSave();
-  try {
-    return dynCall_ijji(index,a1,a2,a3,a4,a5);
-  } catch(e) {
-    stackRestore(sp);
-    if (e !== e+0) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_iiiiijiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9) {
-  var sp = stackSave();
-  try {
-    return dynCall_iiiiijiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9);
-  } catch(e) {
-    stackRestore(sp);
-    if (e !== e+0) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_iiiiiiiiiji(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11) {
-  var sp = stackSave();
-  try {
-    return dynCall_iiiiiiiiiji(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11);
-  } catch(e) {
-    stackRestore(sp);
-    if (e !== e+0) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_vji(index,a1,a2,a3) {
-  var sp = stackSave();
-  try {
-    dynCall_vji(index,a1,a2,a3);
-  } catch(e) {
-    stackRestore(sp);
-    if (e !== e+0) throw e;
-    _setThrew(1, 0);
-  }
-}
-
 function invoke_jjji(index,a1,a2,a3,a4,a5) {
   var sp = stackSave();
   try {
@@ -18424,21 +19874,10 @@ function invoke_jjji(index,a1,a2,a3,a4,a5) {
   }
 }
 
-function invoke_viiiji(index,a1,a2,a3,a4,a5,a6) {
+function invoke_iiiiijiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9) {
   var sp = stackSave();
   try {
-    dynCall_viiiji(index,a1,a2,a3,a4,a5,a6);
-  } catch(e) {
-    stackRestore(sp);
-    if (e !== e+0) throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_jijii(index,a1,a2,a3,a4,a5) {
-  var sp = stackSave();
-  try {
-    return dynCall_jijii(index,a1,a2,a3,a4,a5);
+    return dynCall_iiiiijiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9);
   } catch(e) {
     stackRestore(sp);
     if (e !== e+0) throw e;
@@ -18890,6 +20329,8 @@ unexportedRuntimeFunction('wr', false);
 unexportedRuntimeFunction('wr__user', false);
 unexportedRuntimeFunction('jsWebRequestGetResponseHeaderString', false);
 unexportedRuntimeFunction('jsWebRequestGetResponseHeaderString__user', false);
+unexportedRuntimeFunction('zappar_support', false);
+unexportedRuntimeFunction('zappar_support__user', false);
 unexportedRuntimeFunction('webSocketInstances', false);
 unexportedRuntimeFunction('webSocketInstances__user', false);
 unexportedRuntimeFunction('warnOnce', false);
