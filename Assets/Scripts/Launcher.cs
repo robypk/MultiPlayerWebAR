@@ -77,6 +77,7 @@ namespace ROBY.Photon
         {
             base.OnConnectedToMaster();
             PhotonNetwork.JoinLobby();
+            PhotonNetwork.AutomaticallySyncScene = true;   
             ErrorField.text = "Connected to Master";
         }
 
@@ -201,15 +202,16 @@ namespace ROBY.Photon
             }
             foreach (RoomInfo roomInfo in roomList)
             {
-                if (roomInfo.IsVisible)
+                if (roomInfo.RemovedFromList)
                 {
-                    print("NewRoom added");
-                    var room = Instantiate(RoomNameButtonPrefab, RoomListParent);
-                    room.GetComponent<JoinRoom>().RoomNameText.text = roomInfo.Name;
-
-                    Button joinButton = room.GetComponent<Button>();
-                    joinButton.onClick.AddListener(() => JoinRoom(roomInfo.Name));
+                    continue;
                 }
+                print("NewRoom added");
+                var room = Instantiate(RoomNameButtonPrefab, RoomListParent);
+                room.GetComponent<JoinRoom>().RoomNameText.text = roomInfo.Name;
+
+                Button joinButton = room.GetComponent<Button>();
+                joinButton.onClick.AddListener(() => JoinRoom(roomInfo.Name));
 
 
             }
@@ -253,6 +255,15 @@ namespace ROBY.Photon
             {
                 var Player = Instantiate(PlayernamePrefab, PlayerlistParent);
                 Player.GetComponent<TMP_Text>().text = child.NickName;
+            }
+
+            if (PhotonNetwork.IsMasterClient)
+            {
+                StartGameButton.gameObject.SetActive(true);
+            }
+            else
+            {
+                StartGameButton.gameObject.SetActive(false);
             }
 
             if (PhotonNetwork.PlayerList.Length == 2)
