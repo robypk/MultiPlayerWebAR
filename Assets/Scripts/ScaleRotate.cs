@@ -1,13 +1,23 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ScaleRotate : MonoBehaviour
 {
 
+
+    [SerializeField] TMP_Text NameText;
+    [SerializeField] PhotonView self_photonView;
+
     private float initialDistance; // Store initial distance for scaling
     private Vector2 initialTouchPosition; // Store initial touch position for rotation
 
+    private void Start()
+    {
+        setPlayerNickName(self_photonView.Owner.NickName);
+    }
     void Update()
     {
         if (Input.touchCount == 2)
@@ -52,5 +62,13 @@ public class ScaleRotate : MonoBehaviour
                 initialTouchPosition = currentTouchPosition;
             }
         }
+
+
+    }
+
+
+    public void setPlayerNickName(string NickName)
+    {
+        NameText.text = NickName;
     }
 }
