@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,7 +16,7 @@ namespace ROBY.SceneManeger
         }
         public void onSceneChangeButtonClick(int sceneIndex)
         {
-            SceneManager.LoadScene(sceneIndex);
+            PhotonNetwork.LoadLevel(sceneIndex);
         }
 
 
